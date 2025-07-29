@@ -35,7 +35,7 @@ if 'token' not in st.session_state:
     result = oauth2.authorize_button(
         name="Continuar com o Google",
         icon="https://www.google.com.br/favicon.ico",
-        redirect_uri="http://localhost:8501", # Deve ser o mesmo URI de redirecionamento configurado no Google Cloud
+        redirect_uri="https://automacao-quanta.onrender.com", # Deve ser o mesmo URI de redirecionamento configurado no Google Cloud
         scope="openid email profile",
         key="google",
         use_container_width=True,
