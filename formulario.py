@@ -31,11 +31,10 @@ st.logo("logo-quanta-oficial.png", size="large")
 oauth2 = OAuth2Component(CLIENT_ID, CLIENT_SECRET, AUTHORIZE_ENDPOINT, TOKEN_ENDPOINT, TOKEN_ENDPOINT, REVOKE_ENDPOINT)
 
 if 'token' not in st.session_state:
-    # Se não, mostre o botão de login
     result = oauth2.authorize_button(
         name="Continuar com o Google",
         icon="https://www.google.com.br/favicon.ico",
-        redirect_uri="https://automacao-quanta.onrender.com", # Deve ser o mesmo URI de redirecionamento configurado no Google Cloud
+        redirect_uri="https://automacao-quanta.onrender.com", 
         scope="openid email profile",
         key="google",
         use_container_width=True,
@@ -274,7 +273,7 @@ else:
                             st.error("Erro: A tarefa selecionada não pôde ser encontrada na planilha principal com base em OS, EDT e NOME DA TAREFA. Isso pode indicar um problema de dados ou um cache desatualizado. Por favor, recarregue a página.")
                             st.stop()
 
-                        st.info(f"Tentando atualizar a linha na planilha: **{linha_idx_para_atualizar}**")
+                        st.info(f"Atualização na linha **{linha_idx_para_atualizar}** da planilha")
 
                         perc_concluida_antiga = float(tarefa["% CONCLUIDA"])
                         inicio_real_antigo_value = pd.to_datetime(tarefa["INÍCIO REAL"], errors='coerce')
