@@ -223,17 +223,13 @@ else:
 
             if autor_filtro:
                 dados_df = carregar_dados(sheet)
-                
-                # --- FILTRO ATUALIZADO ---
-                # Converte o autor_filtro para maiúsculas para comparação consistente
+
                 autor_filtro_upper = autor_filtro.upper()
                 
                 df_usuario = dados_df[
-                    # Agora filtra pela nova coluna 'AUTOR_BASE' que contém apenas o nome do autor
                     (dados_df["AUTOR_BASE"] == autor_filtro_upper) & 
                     (dados_df["% CONCLUIDA"] < 100.0)
                 ]
-                # --- FIM DO FILTRO ATUALIZADO ---
 
                 if df_usuario.empty:
                     st.warning("Nenhuma tarefa encontrada para este usuário ou todas as tarefas estão 100% concluídas.")
@@ -366,6 +362,9 @@ else:
                                 else:
                                     autor_com_data_hora = f"{autor_original_da_tarefa} (Editado em {data_hora_edicao})"
 
+                                # Junta o e-mail do usuário com a data e hora da atualização
+                                email_com_timestamp = f"{user_email} (Atualizado em {data_hora_edicao})"
+
                                 valores_para_salvar_dict = {
                                     "% CONCLUIDA": f"{perc_concluida:.1f}",
                                     "MEMORIAL DE CÁLCULO": memorial_calculo,
@@ -398,7 +397,7 @@ else:
                                     "CPI_HH": cpi_hh,
                                     "EAC_HH": eac_hh,
                                     "OBSERVAÇÕES": observacoes,
-                                    "EMAIL": user_email
+                                    "EMAIL": email_com_timestamp
                                 }
                                 
                                 nova_linha_valores = [str(valores_para_salvar_dict.get(col, "")) for col in colunas_esperadas]
